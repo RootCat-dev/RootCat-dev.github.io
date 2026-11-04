@@ -6,7 +6,7 @@ const dev = process.argv.includes('dev');
 const { remarkMedia, rehypeMedia, integration } = createMediaPlugins({ dev });
 
 export default defineConfig({
-  site: 'https://blog.polebug.com',
+  site: 'https://3254egegwr.github.io',
   vite: { plugins: [fontCdnPlugin()] },
   trailingSlash: 'ignore',
   build: { format: 'directory' },
