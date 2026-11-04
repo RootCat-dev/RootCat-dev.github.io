@@ -48,7 +48,6 @@ const talk = post.data.comments && !post.draft;
         <Content />
       </div>
     </article>
-    <div class="post-end" aria-hidden="true">· The End ·</div>
     {(newer || older) && (
       <nav class="post-nav" aria-label="More posts">
         {older && <a class="prev" href={older.url}><small>← Older</small>{older.data.title}</a>}
@@ -92,17 +91,6 @@ const talk = post.data.comments && !post.draft;
 
   .talk { width: min(560px, 100%); overflow: hidden; }
   .talk .drawer-body { overflow: hidden; padding-bottom: max(16px, env(safe-area-inset-bottom)); }
-  .post-end {
-    text-align: center;
-    font: 400 13px/1 var(--serif);
-    letter-spacing: 4px;
-    color: var(--faint);
-    margin: 40px auto 20px;
-    padding-top: 20px;
-    border-top: 1px dashed var(--line);
-    width: min(100%, 280px);
-    break-inside: avoid;
-  }
 
   @media (max-width: 700px) {
     .post-cover h1 { font-size: 22px; overflow-wrap: anywhere; }
