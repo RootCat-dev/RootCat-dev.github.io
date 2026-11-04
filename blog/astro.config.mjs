@@ -6,7 +6,7 @@ const dev = process.argv.includes('dev');
 const { remarkMedia, rehypeMedia, integration } = createMediaPlugins({ dev });
 
 export default defineConfig({
-  site: 'https://3254egegwr.github.io',
+  site: 'https://rootcat-dev.github.io',
   vite: { plugins: [fontCdnPlugin()] },
   trailingSlash: 'ignore',
   build: { format: 'directory' },
