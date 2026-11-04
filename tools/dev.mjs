@@ -25,18 +25,26 @@ await serveStatic({
   },
 });
 
+const isWin = process.platform === 'win32';
+const NPX = isWin ? 'npx.cmd' : 'npx';
+
 // Both servers listen on the same IPv4 address, so links work whether the page was opened as localhost or 127.0.0.1.
-const astro = spawn('npx', ['astro', 'dev', '--force', '--port', String(BLOG_PORT), '--host', host], {
+const astro = spawn(NPX, ['astro', 'dev', '--force', '--port', String(BLOG_PORT), '--host', host], {
   cwd: path.join(ROOT, 'blog'),
   stdio: 'inherit',
+  shell: isWin,
 });
 astro.on('exit', (code) => process.exit(code ?? 0));
 
 // The visitor counter (stats/), on a local copy of its database; pages find it on port 8787 of their own host.
 const wrangler = ['--yes', 'wrangler@4.152.0'];
 const STATS = path.join(ROOT, 'stats');
-execFileSync('npx', [...wrangler, 'd1', 'migrations', 'apply', 'polebug-stats', '--local'], { cwd: STATS, stdio: 'ignore' });
-const stats = spawn('npx', [...wrangler, 'dev', '--port', String(STATS_PORT), '--ip', host, '--test-scheduled'], { cwd: STATS, stdio: 'ignore' });
+try {
+  execFileSync(NPX, [...wrangler, 'd1', 'migrations', 'apply', 'polebug-stats', '--local'], { cwd: STATS, stdio: 'ignore', shell: isWin });
+} catch (e) {
+  // Ignore local stats migration error on first boot if any
+}
+const stats = spawn(NPX, [...wrangler, 'dev', '--port', String(STATS_PORT), '--ip', host, '--test-scheduled'], { cwd: STATS, stdio: 'ignore', shell: isWin });
 
 for (const sig of ['SIGINT', 'SIGTERM']) process.on(sig, () => { astro.kill(sig); stats.kill(sig); });
 

@@ -8,7 +8,7 @@ const years = [...new Set(posts.map((p) => p.ymd.year))];
 ---
 <Base nav="archive" title={heading === 'Archive' ? 'Archive' : `Archive · ${heading}`}>
   <h1 class="page-title">{heading}</h1>
-  <p class="motto">{posts.length} posts</p>
+  <p class="motto">{posts.length} {posts.length === 1 ? 'post' : 'posts'}</p>
   {years.map((year) => (
     <section>
       <h2 class="archive-year">{year}</h2>

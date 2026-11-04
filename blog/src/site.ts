@@ -1,9 +1,10 @@
 export const SITE = {
-  title: '保持思考、等待、斋戒',
-  author: 'Polebug',
-  description: "Polebug's blog: notes on life, work and AI.",
+  title: '保持思考',
+  author: 'RootCat',
+  description: "RootCat's blog: notes on life and technology.",
   homeUrl: 'https://polebug.com/',
-  github: 'https://github.com/polebug',
+  github: 'https://github.com/3254egegwr',
+  email: '18726092325@163.com',
   // Comments are GitHub issues in this repo, via utterances (see components/Comments.astro).
-  comments: { repo: 'polebug/polebug.github.io' },
+  comments: { repo: '3254egegwr/polebug.github.io' },
 };

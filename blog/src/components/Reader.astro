@@ -1,5 +1,6 @@
 ---
 import { stamp, type Post } from '../lib/posts';
+import { SITE } from '../site';
 
 // The reader, in the manner of WeRead's web reader: one panel the height of the window, with
 // whatever is slotted in (the index's entries, or a post) flowing through it two columns at a
@@ -28,7 +29,7 @@ const { posts, headings, start = 0, label, back } = Astro.props;
         )}
         Blog
       </span>
-      <span class="motto-sm">保持思考 · 等待 · 斋戒</span>
+      <span class="motto-sm">{SITE.title}</span>
     </header>
 
     <div class="pages">
