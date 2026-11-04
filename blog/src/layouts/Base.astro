@@ -15,8 +15,7 @@ interface Props {
 }
 const { title, description = SITE.description, nav, wide } = Astro.props;
 const pageTitle = title ? `${title} · ${SITE.author}` : `${SITE.author} · Blog`;
-// In `npm run dev` the homepage runs on port 8000 of the same machine.
-const homeUrl = import.meta.env.DEV ? `http://${Astro.url.hostname}:8000/` : SITE.homeUrl;
+const homeUrl = SITE.homeUrl;
 const year = new Date().getFullYear();
 ---
 <!doctype html>
