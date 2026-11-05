@@ -82,27 +82,23 @@ const talk = post.data.comments && !post.draft;
   .post-cover h1 { margin: 0 0 22px; font: 400 26px/1.6 var(--serif); color: var(--ink); }
   
   .tags {
-    margin: 0;
+    margin: 4px 0 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 8px 10px;
+    align-items: center;
+    font: 400 13px/1.6 var(--serif);
+    letter-spacing: 1.2px;
+    color: var(--faint);
   }
   .tag {
-    font: 500 12px/1 var(--serif), sans-serif;
-    letter-spacing: 0.8px;
-    color: var(--faint);
-    background: var(--paper-2);
-    border: 1px solid var(--line);
-    padding: 5px 12px;
-    border-radius: 14px;
     display: inline-flex;
     align-items: center;
-    transition: color .2s, border-color .2s;
   }
-  .tag:hover {
-    color: var(--accent);
-    border-color: var(--accent-soft);
+  .tag:not(:last-child)::after {
+    content: "·";
+    margin: 0 10px;
+    opacity: 0.5;
   }
 
   .talk { width: min(560px, 100%); overflow: hidden; }
