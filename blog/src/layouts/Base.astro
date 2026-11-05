@@ -30,7 +30,9 @@ const year = new Date().getFullYear();
   <link rel="preconnect" href={FONT_ORIGIN} crossorigin />
   {fontPreloads.map(href => <link rel="preload" as="font" type="font/woff2" href={href} crossorigin />)}
   <Fragment set:html={subsetStyles ? `<style data-font-subsets>${subsetStyles}</style>` : ''} />
-  <link rel="icon" href="/avatar.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" href="/avatar.png">
+  <link rel="apple-touch-icon" href="/avatar.png">
   <link rel="alternate" type="application/atom+xml" title={SITE.title} href="/atom.xml">
   <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)}>
   <script is:inline>
