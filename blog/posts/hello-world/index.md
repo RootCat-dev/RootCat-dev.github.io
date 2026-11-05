@@ -1,5 +1,5 @@
 ---
-title: Hello World
+title: 博客搭建完成，记录一下这个属于自己的数字小站
 date: 2026-11-04 18:58
 tags:
   - 随笔
