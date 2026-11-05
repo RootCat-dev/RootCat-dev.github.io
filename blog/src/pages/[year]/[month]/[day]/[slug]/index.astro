@@ -32,7 +32,7 @@ const talk = post.data.comments && !post.draft;
       {tags.length > 0 && (
         <div class="tags" aria-label="Tags">
           {tags.map((tag) => (
-            <span class="tag">#{tag}</span>
+            <span class="tag">{tag}</span>
           ))}
         </div>
       )}
@@ -86,11 +86,11 @@ const talk = post.data.comments && !post.draft;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 8px 12px;
+    gap: 8px 10px;
   }
   .tag {
-    font: 500 12px/1 "Lato", -apple-system, sans-serif;
-    letter-spacing: 0.6px;
+    font: 500 12px/1 var(--serif), sans-serif;
+    letter-spacing: 0.8px;
     color: var(--faint);
     background: var(--paper-2);
     border: 1px solid var(--line);
