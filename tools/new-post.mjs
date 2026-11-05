@@ -16,5 +16,5 @@ if (fs.existsSync(path.join(POSTS_DIR, slug)) || fs.existsSync(path.join(DRAFTS_
 const now = new Date(Date.now() + 8 * 3600_000).toISOString().slice(0, 16).replace('T', ' ');
 const dir = path.join(DRAFTS_DIR, slug);
 fs.mkdirSync(dir, { recursive: true });
-fs.writeFileSync(path.join(dir, 'index.md'), `---\ntitle: ${title}\ndate: ${now}\ndesc:\n---\n\n`);
+fs.writeFileSync(path.join(dir, 'index.md'), `---\ntitle: ${title}\ndate: ${now}\ntags:\n  - 随笔\n---\n\n`);
 console.log(`Created blog/drafts/${slug}/index.md — put its images and videos in the same folder.`);
