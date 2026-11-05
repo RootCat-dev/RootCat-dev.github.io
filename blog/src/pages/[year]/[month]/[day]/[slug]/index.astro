@@ -7,7 +7,7 @@ import { commentDocument } from '../../../../../lib/comment-document';
 import { getPosts, stamp, type Post } from '../../../../../lib/posts';
 import '../../../../../styles/prose.css';
 
-// A post, read in the same Reader as the index: page 1 is the cover (date and title),
+// A post, read in the same Reader as the index: page 1 is the cover (date, title, and reading time),
 // the text follows two pages at a time (or scrolling), and the comments open in a drawer from the rail.
 export async function getStaticPaths() {
   const posts = await getPosts();
@@ -21,6 +21,11 @@ const { Content, headings: all } = await render(post);
 // The catalogue: the post's H1–H3 (its H4s when it has nothing above that, as some older posts).
 const top = all.filter((h) => h.depth <= 3);
 const headings = top.length ? top : all.filter((h) => h.depth === 4);
+// Reading time: Chinese at about 400 characters a minute, other words at 200.
+const body = post.body ?? '';
+const cjk = (body.match(/[㐀-鿿]/g) ?? []).length;
+const words = (body.replace(/[㐀-鿿]/g, ' ').match(/[A-Za-z0-9]+/g) ?? []).length;
+const minutes = Math.max(1, Math.round(cjk / 400 + words / 200));
 const talk = post.data.comments && !post.draft;
 ---
 <Base title={post.data.title} description={post.excerpt} wide>
@@ -28,6 +33,9 @@ const talk = post.data.comments && !post.draft;
     <header class="post-cover" slot="cover">
       <time datetime={post.data.date.toISOString()}>{stamp(post.data.date)}</time>
       <h1>{post.data.title}{post.draft && <span class="draft-badge">Draft</span>}</h1>
+      <p class="meta">
+        <span>{minutes} min read</span>
+      </p>
     </header>
 
     <article>
@@ -68,10 +76,11 @@ const talk = post.data.comments && !post.draft;
 </script>
 
 <style>
-  /* The cover: the same date and title as an entry on the index, centered cleanly. */
+  /* The cover: the same date and title as an entry on the index, with reading time beneath. */
   .post-cover { width: min(100%, 760px); }
   .post-cover time { display: block; font: 700 12px/1 "Lato", sans-serif; letter-spacing: 1.2px; color: var(--faint); margin-bottom: 18px; }
-  .post-cover h1 { margin: 0; font: 400 26px/1.6 var(--serif); color: var(--ink); }
+  .post-cover h1 { margin: 0 0 20px; font: 400 26px/1.6 var(--serif); color: var(--ink); }
+  .meta { margin: 0; font: 400 13px/1 "Lato", sans-serif; letter-spacing: 1px; color: var(--faint); display: flex; justify-content: center; }
 
   .talk { width: min(560px, 100%); overflow: hidden; }
   .talk .drawer-body { overflow: hidden; padding-bottom: max(16px, env(safe-area-inset-bottom)); }
